@@ -17,4 +17,12 @@ class User extends Authenticatable
     protected $hidden = [
         'password',
     ];
+
+    public function homes() {
+        return $this->hasMany(Home::class);
+    }
+
+    public function routines() {
+        return $this->hasMany(Routine::class);
+    }
 }

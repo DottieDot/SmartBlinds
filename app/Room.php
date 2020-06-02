@@ -25,6 +25,11 @@ class Room extends Model
 
     public function routines()
     {
-        return $this->belongsToMany(Routine::class, 'room_routine_pivot', 'room_id', 'routine_id');
+        return $this->belongsToMany(Routine::class, 'routine_actions', 'room_id', 'routine_id');
+    }
+
+    public function routineActions()
+    {
+        return $this->hasMnay(RoutineAction::class);
     }
 }

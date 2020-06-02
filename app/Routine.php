@@ -17,9 +17,9 @@ class Routine extends Model
         'trigger_at' => 'datetime',
     ];
 
-    public function rooms() 
+    public function actions() 
     {
-        return $this->hasMany(Room::class);
+        return $this->hasMany(RoutineAction::class);
     }
 
     public function user()

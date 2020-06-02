@@ -28,7 +28,7 @@ php artisan migrate
 ```
 **Seed database (optional)**
 ```
-composer dum-autoload
+composer dump-autoload
 php artisan db:seed
 ```
 Or if you want to rebuild your database.
