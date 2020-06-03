@@ -10,7 +10,7 @@ class Home extends Model
     use Notifiable;
 
     protected $fillable = [
-        'name',
+        'name', 
     ];
 
     public function rooms()
