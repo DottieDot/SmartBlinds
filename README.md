@@ -17,10 +17,13 @@ cd SmartBlinds
 ```
 copy ".env.example" ".env"
 ```
-
 **Install composer dependencies**
 ```
 composer install
+```
+**Generate keys**
+```
+php artisan key:generate
 ```
 **Migrate database**
 ```
