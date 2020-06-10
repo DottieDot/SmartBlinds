@@ -16,4 +16,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:api')->group(function() {
     Route::get('/homes', 'HomeController@GetHomes');
+    Route::get('/user', 'UserController@GetUser');
+    Route::get('/systems', 'SystemController@GetSystems');
 });

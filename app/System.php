@@ -13,13 +13,13 @@ class System extends Model
         'name', 'state',
     ];
 
-    public function home() 
-    {
-        return $this->belongsTo(Home::class);
-    }
-
     public function room()
     {
         return $this->belongsTo(Room::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 }

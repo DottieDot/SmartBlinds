@@ -22,6 +22,10 @@ class User extends Authenticatable
         return $this->hasMany(Home::class);
     }
 
+    public function systems() {
+        return $this->hasMany(System::class);
+    }
+
     public function routines() {
         return $this->hasMany(Routine::class);
     }
