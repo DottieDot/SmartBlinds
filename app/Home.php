@@ -9,6 +9,14 @@ class Home extends Model
 {
     use Notifiable;
 
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($home) {
+            $home->rooms()->delete();
+        });
+    }
+
     protected $fillable = [
         'name', 
     ];

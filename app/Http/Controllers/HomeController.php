@@ -33,4 +33,26 @@ class HomeController extends Controller {
             'id' => $home->id
         ]);
     }
+
+    public function DeleteHome($home_id) {
+        Home::find($home_id)->delete();
+
+        return response()->json([
+            'success' => true
+        ]);
+    }
+
+    public function SetHomeName(Request $request, $home_id) {
+        $validated = $request->validate([
+            'name' => 'required|string'
+        ]);
+
+        $home = Home::find($home_id);
+        $home->name = $validated['name'];
+        $home->save();
+
+        return response()->json([
+            'success' => true
+        ]);
+    }
 }

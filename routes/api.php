@@ -16,7 +16,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:api')->group(function() {
     Route::get('/homes', 'HomeController@GetHomes');
-    Route::post('/create-home', 'HomeController@CreateHome');
+    Route::post('/homes', 'HomeController@CreateHome');
+
+    Route::middleware('owner:App\Home,home_id')->group(function() {
+        Route::delete('/homes/{home_id}', 'HomeController@DeleteHome');
+        Route::patch('/homes/{home_id}/name', 'HomeController@SetHomeName');
+    });
 
     Route::get('/user', 'UserController@GetUser');
 

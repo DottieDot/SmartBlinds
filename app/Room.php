@@ -13,6 +13,15 @@ class Room extends Model
         'name', 'state',
     ];
 
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($room) {
+            $room->routineActions()->delete();
+            $room->systems->dissociate();
+        });
+    }
+
     public function home() 
     {
         return $this->belongsTo(Home::class);
