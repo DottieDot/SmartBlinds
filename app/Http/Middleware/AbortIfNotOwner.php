@@ -19,7 +19,7 @@ class AbortIfNotOwner
 
         $resource = $model::find($resourceId);
 
-        if ($resource === null || $resource->user_id !== $request->user()->id) {
+        if (!$resource || !$resource->user || $resource->user->id !== $request->user()->id) {
             abort(403);
         }
 

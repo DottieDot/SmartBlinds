@@ -21,6 +21,12 @@ Route::middleware('auth:api')->group(function() {
     Route::middleware('owner:App\Home,home_id')->group(function() {
         Route::delete('/homes/{home_id}', 'HomeController@DeleteHome');
         Route::patch('/homes/{home_id}/name', 'HomeController@SetHomeName');
+
+        Route::post('/homes/{home_id}/rooms', 'RoomController@CreateRoom');
+    });
+
+    Route::middleware('owner:App\Room,room_id')->group(function() {
+        route::delete('/rooms/{room_id}', 'RoomController@DeleteRoom');
     });
 
     Route::get('/user', 'UserController@GetUser');

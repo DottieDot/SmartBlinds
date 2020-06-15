@@ -8,6 +8,7 @@ use Illuminate\Notifications\Notifiable;
 class Room extends Model
 {
     use Notifiable;
+    use \Znck\Eloquent\Traits\BelongsToThrough;
 
     protected $fillable = [
         'name', 'state',
@@ -18,13 +19,21 @@ class Room extends Model
 
         static::deleting(function($room) {
             $room->routineActions()->delete();
-            $room->systems->dissociate();
+            $room->systems()->each(function($system) {
+                $system->room()->dissociate();
+                $system->save();
+            });
         });
     }
 
     public function home() 
     {
         return $this->belongsTo(Home::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsToThrough(User::class, Home::class);
     }
 
     public function systems()
@@ -39,6 +48,6 @@ class Room extends Model
 
     public function routineActions()
     {
-        return $this->hasMnay(RoutineAction::class);
+        return $this->hasMany(RoutineAction::class);
     }
 }
