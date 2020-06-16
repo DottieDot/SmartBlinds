@@ -32,6 +32,8 @@ Route::middleware('auth:api')->group(function() {
     });
 
     Route::get('/user', 'UserController@GetUser');
+    Route::patch('/user/details', 'UserController@ChangeDetails');
+    Route::patch('/user/password', 'UserController@ChangePassword');
 
     Route::get('/systems', 'SystemController@GetSystems');
 });
