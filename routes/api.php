@@ -26,6 +26,8 @@ Route::middleware('auth:api')->group(function() {
     });
 
     Route::middleware('owner:App\Room,room_id')->group(function() {
+        Route::patch('/rooms/{room_id}/name', 'RoomController@SetRoomName');
+        Route::patch('/rooms/{room_id}/state', 'RoomController@SetRoomState');
         route::delete('/rooms/{room_id}', 'RoomController@DeleteRoom');
     });
 
