@@ -19,8 +19,8 @@ class DatabaseSeeder extends Seeder
                 factory(App\Room::class, rand(1,5))->make()->each(function ($room) use ($home) {
                     $home->rooms()->save($room);
 
-                    factory(App\System::class, rand(1, 5))->make()->each(function ($system) use ($room) {
-                        $system->user_id = $room->user_id;
+                    factory(App\System::class, rand(1, 5))->make()->each(function ($system) use ($home, $room) {
+                        $system->user_id = $home->user_id;
                         
                         $room->systems()->save($system);
                     });
