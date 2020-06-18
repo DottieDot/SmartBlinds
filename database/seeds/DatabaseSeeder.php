@@ -20,7 +20,7 @@ class DatabaseSeeder extends Seeder
                     $home->rooms()->save($room);
 
                     factory(App\System::class, rand(1, 5))->make()->each(function ($system) use ($room) {
-                        $system->home_id = $room->home_id;
+                        $system->user_id = $room->user_id;
                         
                         $room->systems()->save($system);
                     });
