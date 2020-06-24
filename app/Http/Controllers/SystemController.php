@@ -14,4 +14,12 @@ class SystemController extends Controller
 
         return SystemResource::collection($user->systems);
     }  
+
+    public function GetState($system_id) {
+        $system = System::find($system_id);
+
+        return response()->json([
+            'state' => $system->state
+        ]);
+    }
 }
