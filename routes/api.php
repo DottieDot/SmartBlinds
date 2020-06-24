@@ -34,7 +34,7 @@ Route::middleware('auth:api')->group(function() {
     });
 
     Route::middleware('owner:App\System,system_id')->group(function() { 
-        Route::get('/systems/{system_id}/state', 'SystemController@GetState');
+        
     });
 
     Route::get('/user', 'UserController@GetUser');
@@ -43,3 +43,5 @@ Route::middleware('auth:api')->group(function() {
 
     Route::get('/systems', 'SystemController@GetSystems');
 });
+
+Route::get('/systems/{system_id}/state', 'SystemController@GetState');
