@@ -19,7 +19,7 @@ class SystemController extends Controller
         $system = System::find($system_id);
 
         return response()->json([
-            'state' => $system->state
+            'state' => $system->room->state
         ]);
     }
 }
