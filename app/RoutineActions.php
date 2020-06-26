@@ -8,9 +8,10 @@ use Illuminate\Notifications\Notifiable;
 class RoutineAction extends Model
 {
     use Notifiable;
+    use \Znck\Eloquent\Traits\BelongsToThrough;
 
     protected $fillable = [
-        'state',
+        'state', 'room_id'
     ];
 
     public function room() {
@@ -19,5 +20,10 @@ class RoutineAction extends Model
 
     public function routine() {
         return $this->belongsTo(Routine::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsToThrough(User::class, Routine::class);
     }
 }

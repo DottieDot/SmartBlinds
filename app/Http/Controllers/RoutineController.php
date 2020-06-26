@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Http\Resources\Routine as RoutineResource;
+use App\Room;
 use App\Routine;
+use App\RoutineAction;
 use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -84,6 +86,55 @@ class RoutineController extends Controller
         $routine = Routine::find($routine_id);
         $routine->days = $validated['days'];
         $routine->save();
+
+        return response()->json([
+            'success' => true
+        ]);
+    }
+
+    public function CreateAction(Request $request, $routine_id)
+    {
+        $validated = $request->validate([
+            'room_id' => 'required|exists:rooms,id'
+        ]);
+
+        $room = Room::find($validated['room_id']);
+        if ($room->user->id !== Auth::id()) {
+            abort(403);
+        }
+
+        $action = new RoutineAction([
+            'room_id' => $validated['room_id'],
+            'state' => 0,
+        ]);
+
+        $routine = Routine::find($routine_id);
+        $routine->actions()->save($action);
+
+        return response()->json([
+            'id' => $action->id,
+        ]);
+    }
+
+    public function SetActionState(Request $request, $action_id) 
+    {
+        $validated = $request->validate([
+            'state' => 'numeric|min:0|max:1'
+        ]);
+        
+        $action = RoutineAction::find($action_id);
+        $action->state = $validated['state'];
+        $action->save();
+
+        return response()->json([
+            'success' => true
+        ]);
+    }
+
+    public function DeleteAction(Request $request, $action_id)
+    {
+        $action = RoutineAction::find($action_id);
+        $action->delete();
 
         return response()->json([
             'success' => true
