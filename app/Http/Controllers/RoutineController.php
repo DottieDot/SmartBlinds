@@ -67,7 +67,7 @@ class RoutineController extends Controller
         ]);
 
         $routine = Routine::find($routine_id);
-        $routine->trigget_at = $validated['trigger'];
+        $routine->trigger_at = $validated['trigger'];
         $routine->save();
 
         return response()->json([ 
@@ -78,7 +78,7 @@ class RoutineController extends Controller
     public function SetDays(Request $request, $routine_id) 
     {
         $validated = $request->validate([
-            'days' => 'days|required'
+            'days' => 'numeric|required'
         ]);
 
         $routine = Routine::find($routine_id);
