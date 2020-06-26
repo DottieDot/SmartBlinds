@@ -15,11 +15,17 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::middleware('auth:api')->group(function() {
+    Route::get('/routines', 'RoutineController@GetRoutines');
+    Route::post('/rotuines', 'RoutineCotnroller@CreateRoutine');
+    Route::middleware(('owner:App\Routine,routine_id'))->group(function() {
+        Route::delete('/routines/{routine_id}', 'RoutineController@DeleteRoutine');
+        Route::patch('/routines/{routine_id}/name', 'RoutineController@SetName');
+        Route::patch('/routines/{routine_id}/trigger', 'RoutineController@SetTrigger');
+        Route::patch('/routines/{routine_id}/days', 'RoutineController@SetDays');
+    });
+
     Route::get('/homes', 'HomeController@GetHomes');
     Route::post('/homes', 'HomeController@CreateHome');
-
-    Route::get('/routines', 'RoutineController@GetRoutines');
-
     Route::middleware('owner:App\Home,home_id')->group(function() {
         Route::delete('/homes/{home_id}', 'HomeController@DeleteHome');
         Route::patch('/homes/{home_id}/name', 'HomeController@SetHomeName');

@@ -13,9 +13,13 @@ class Routine extends Model
         'name', 'trigger_at', 'days',
     ];
 
-    protected $casts = [
-        'trigger_at' => 'datetime',
-    ];
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($room) {
+            $room->actions()->delete();
+        });
+    }
 
     public function actions() 
     {
