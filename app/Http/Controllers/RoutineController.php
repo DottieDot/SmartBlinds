@@ -26,7 +26,7 @@ class RoutineController extends Controller
 
         $routine = new Routine([
             'name' => $validated['name'],
-            'trigget_at' => '',
+            'trigger_at' => '00:00:00',
             'days' => 0,
         ]);
         $user->routines()->save($routine);
