@@ -1,5 +1,7 @@
 # SmartBlinds
 
+The backend for "smart" blinds for my school assignment. 
+
 ## Prerequisites
 - Apache server
 - PHP
