@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:api')->group(function() {
     Route::get('/routines', 'RoutineController@GetRoutines');
-    Route::post('/rotuines', 'RoutineCotnroller@CreateRoutine');
+    Route::post('/routines', 'RoutineCotnroller@CreateRoutine');
     Route::middleware(('owner:App\Routine,routine_id'))->group(function() {
         Route::delete('/routines/{routine_id}', 'RoutineController@DeleteRoutine');
         Route::patch('/routines/{routine_id}/name', 'RoutineController@SetName');
